@@ -44,7 +44,7 @@ function getRecordDate(record) {
   const value = record?.updatedAt ?? record?.createdAt
   if (typeof value !== 'string') return null
   const ts = new Date(value)
-  return isNaN(ts.getTime()) ? null : ts.toISOString().replace(/[:.]/g, '-').slice(0, 19)
+  return isNaN(ts.getTime()) ? null : ts
 }
 
 async function carToZip(bytes, onProgress) {
@@ -66,7 +66,7 @@ async function carToZip(bytes, onProgress) {
   const keys = Object.keys(flatRecords)
   onProgress(`Found ${keys.length} records. Building ZIP…`)
 
-  const now = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
+  const now = new Date()
   const zipFiles = {}
 
   for (const path of keys) {
@@ -74,9 +74,9 @@ async function carToZip(bytes, onProgress) {
     const collection = slash >= 0 ? path.slice(0, slash) : path
     const rkey = slash >= 0 ? path.slice(slash + 1) : path
     const record = flatRecords[path]
-    const date = getRecordDate(record) ?? now
-    const filename = `${collection}/${rkey}_${date}.json`
-    zipFiles[filename] = new TextEncoder().encode(JSON.stringify(record, null, 2))
+    const mtime = getRecordDate(record) ?? now
+    const filename = `${collection}/${rkey}.json`
+    zipFiles[filename] = [new TextEncoder().encode(JSON.stringify(record, null, 2)), { mtime }]
   }
 
   const zipped = zipSync(zipFiles, { level: 6 })
