@@ -15,15 +15,15 @@ A self-contained browser tool that converts an ATproto `.car` export file into a
 
 ```
 app.bsky.feed.post/
-  3jwhatever_2024-01-15T12-30-00.json
-  3janother_2024-01-10T08-00-00.json
+  3jwhatever.json
+  3janother.json
 app.bsky.actor.profile/
-  self_2023-09-01T00-00-00.json
+  self.json
 app.bsky.graph.follow/
   ...
 ```
 
-Records are grouped by collection. The filename is `{rkey}_{createdAt|updatedAt}.json` (ISO timestamp with `-` instead of `:` so it's safe on all filesystems).
+Records are grouped by collection. The filename is `{rkey}.json`. Each file's modification time is set to the record's `createdAt` (or `updatedAt`) timestamp, so the date is visible in any file manager after extracting.
 
 ## How to get a `.car` file
 
