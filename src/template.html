@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATproto CAR Exporter</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      margin: 24px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    #dropzone {
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 16px;
+    }
+
+    #dropzone:hover, #dropzone.drag-over {
+      border-color: #0085ff;
+      background: #f0f7ff;
+    }
+
+    #dropzone .icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    #dropzone p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    #dropzone strong {
+      color: #0085ff;
+    }
+
+    #file-input { display: none; }
+
+    #export-btn {
+      width: 100%;
+      padding: 12px;
+      background: #0085ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-bottom: 12px;
+    }
+
+    #export-btn:hover:not(:disabled) { background: #0070d6; }
+    #export-btn:disabled { background: #aaa; cursor: not-allowed; }
+
+    #status {
+      font-size: 0.85rem;
+      color: #555;
+      min-height: 1.4em;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      font-size: 0.8rem;
+      color: #999;
+      text-align: center;
+    }
+
+    footer a { color: #0085ff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>ATproto CAR Exporter</h1>
+    <p class="subtitle">
+      Select your ATproto repository export (.car) to download all records
+      as JSON files organised by collection inside a ZIP.
+    </p>
+
+    <div id="dropzone">
+      <div class="icon">📦</div>
+      <p>Drop your <strong>.car</strong> file here</p>
+      <p>or click the button below</p>
+    </div>
+
+    <input type="file" id="file-input" accept=".car">
+    <button id="export-btn">Select .car file &amp; Export ZIP</button>
+    <div id="status"></div>
+
+    <footer>
+      <a href="https://github.com/DracoBlue/atproto-car-exporter" target="_blank">GitHub</a>
+      &nbsp;·&nbsp;
+      Copyright &copy; 2026 <a href="https://dracoblue.net" target="_blank">DracoBlue</a>
+      &nbsp;·&nbsp; MIT License
+    </footer>
+  </div>
+
+  <!-- BUNDLE -->
+</body>
+</html>
